@@ -76,13 +76,21 @@ public class SerDe {
 		}
 		return post;
 	}
+	static boolean FBVerifyCreateAccount(FBRet ret,int version)
+    {
+        if(version==1)
+        {
+            return FBVerifyCreateAccountV1(ret);
+        }
+        return false;
+    }
 	/**
 	 * A method to verify and transform FB account creation payload. The transformed payload
 	 * will be in FBRet class  
 	 * @param ret
 	 * @return success only if valid account has been created.
 	 */
-	static boolean FBVerifyCreateAccount(FBRet ret)
+	static private boolean FBVerifyCreateAccountV1(FBRet ret)
 	{
 		if(ret!=null && !ret.isCallSuccessFull && ret.retBufAsStr!=null)
 			return false;
